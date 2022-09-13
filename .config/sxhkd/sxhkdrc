@@ -1,0 +1,197 @@
+# -----------------------------------------------
+# sxhkd
+#
+# make sxhkd reload its configuration files:
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# -----------------------------------------------
+# Windowing Hotkeys
+#
+# Quit/restart bspwm.
+super + alt + {q,r}
+    bspc {quit,wm -r}
+
+# Close a single window.
+alt + q
+    bspc node -c
+
+# Toggle monocle layout.
+alt + m
+    bspc desktop -l next
+
+# swap the current node and the biggest window
+alt + g
+    bspc node -s biggest.window
+
+
+# -----------------------------------------------
+# State / Flags
+#
+# Set node state.
+super + {t,shift + t,s,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Set node flags.
+super + ctrl + {m,x,y,z}
+    bspc node -g {marked,locked,sticky,private}
+
+
+# -----------------------------------------------
+# Focus / Swap
+#
+# Focus node in given direction.
+alt + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+# Focus or send node to given desktop.
+alt + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} focused:'^{1-9,10}'
+
+
+# -----------------------------------------------
+# Receptacle
+#
+# Insert receptacle.
+alt + ctrl + i; {h,j,k,l}
+    bspc node --presel-dir {west,south,north,east} -i
+
+# Move node to open receptable.
+alt + ctrl + i; i
+    bspc node $(bspc query -N -n focused) -n $(bspc query -N -n .leaf.\!window)
+
+# Kill open receptacle.
+alt + ctrl + i; Escape
+    for win in `bspc query -N -n .leaf.\!window`; do bspc node $win -k; done;
+
+# -----------------------------------------------
+# Preselect
+#
+# Preselect in direction.
+alt + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+# Preselect a ratio.
+alt + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# Cancel preselection for the focused node
+alt + ctrl + Escape
+    bspc node -p cancel
+
+# Cancel preselection for the focused desktop
+alt + ctrl + shift + Escape
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+# -----------------------------------------------
+# Move / Resize
+#
+# Expand one of a node's sides.
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Contract one of a node's sides.
+super + alt + shift + {h,j,k,l}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# Equally resize splits.
+super + alt + space
+    bspc node @/ -B
+
+# Move a floating window.
+alt + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+# -----------------------------------------------
+# Controls and Input
+#
+# Increase volume.
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Decrease volume.
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Toggle volume mute.
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Toggle microphone mute.
+XF86AudioMicMute
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Increase screen brightness.
+XF86MonBrightnessUp
+    light -A 5
+
+# Decrease screen brightness.
+XF86MonBrightnessDown
+    light -U 5
+
+
+# -----------------------------------------------
+# Multi-Monitor Functionality
+#
+# Focus monitor.
+super + {1,2,3}
+    bspc desktop -f "^{1,2,3}:focused" --follow
+
+# Swap current desktop with same desktop on target monitor.
+super + shift + {1,2,3}
+    bspc desktop --swap "^{1,2,3}:^"$(bspc query -D -d focused --names) --follow
+
+# Move current node to focused desktop on target monitor.
+super + alt + shift + {1,2,3}
+    bspc node -d "^{1,2,3}:focused" --follow
+
+# Reset monitor desktops.
+super + m
+    bash /usr/local/bin/bspwm-monitor-setup.sh
+
+# Move desktop to next/prev monitor.
+super + {_,shift + }Tab
+	bspc desktop -m {next,prev} --follow && \
+	bspc query -M | while read -r monitor; do \
+	    bspc query -D -m "$monitor" --names | sort -g | xargs -rd'\n' bspc monitor "$monitor" -o; \
+	done
+
+# Sort desktops on active monitor, then remove default 'Desktop'.
+super + x
+	bspc query -M | while read -r monitor; do \
+	    bspc query -D -m "$monitor" --names | sort -g | xargs -rd'\n' bspc monitor "$monitor" -o; \
+	done && \
+        bspc desktop Desktop --remove
+
+
+# -----------------------------------------------
+# Programs
+#
+# Terminal emulator.
+alt + Return
+    alacritty
+
+# Launcher.
+alt + d
+    dmenu_run -nb '#272727' -nf '#ebdbb2' -sb '#b8bb26' -sf '#272727'
+
+# Lock screen.
+super + b
+    i3lock --color 292929
+
+# Set US keyboard layout.
+alt + u
+    setxkbmap us
+
+# Set norwegian keyboard layout.
+alt + n
+    setxkbmap no
+
+# Launch screenshot utility.
+Print
+    flameshot gui
+
+super + p
+    bash /usr/local/bin/bspwm-refresh.sh &

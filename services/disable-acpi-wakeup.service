@@ -1,0 +1,8 @@
+[Unit]
+Description=Disable ACPI Wakeup
+ 
+[Service]
+ExecStart=/usr/local/bin/disable-acpi-wakeup.sh
+ 
+[Install]
+WantedBy=multi-user.target

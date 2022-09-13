@@ -1,0 +1,342 @@
+[global/wm]
+
+##################################################
+#                       system
+#
+[system]
+; Look for battery/adapter: "ls -l /sys/class/power_supply"
+adapter = ACAD
+battery = BAT0
+
+; Look for backlight: "ls -l /sys/class/backlight"
+graphics_card = intel_backlight
+
+; Look for network: "ls -l /sys/class/net"
+network_interface = wlan0
+
+##################################################
+#                       colors
+#
+[color]
+bg = "#272727"
+fg = "#ebdbb2"
+fgdim = "#504945"
+red     = "#fb4934"
+green   = "#b8bb26"
+yellow  = "#fabd2f"
+blue    = "#83a598"
+magenta = "#d3869b"
+cyan    = "#8ec07c"
+white   = "#ebdbb2"
+orange  = "#fe8019"
+
+##################################################
+#                     variables
+#
+[vars]
+
+padding = 1
+
+##################################################
+#                     bar
+#
+[bar/bar]
+
+modules-left = time | backlight volume | kblayout | tailscale
+modules-center = bspwm i3
+modules-right = fanspeed | temperature cpu memory | filesystem battery |
+
+scroll-up = bspwn-wsnext 
+scroll-down = bspwn-wsprev
+override-redirect = false
+wm-restack = bspwm
+monitor = ${env:MONITOR:}
+enable-ipc=true
+height = 35
+width = 100%
+
+font-0 = iA Writer Mono S:pixelsize=12;3
+font-1 = Noto Sans CJK JP:pixelsize=12:antialias=true;3
+# Icons: https://www.nerdfonts.com/cheat-sheet
+
+border-color = ${color.fg}
+background = ${color.bg}
+foreground = ${color.fg}
+
+tray-position=right
+tray-detached=false
+line-size = 2
+
+
+##################################################
+#                     config
+#
+[config]
+; You can find these details from xfce4-power-manager-settings or atleast that's what i use.
+battery-full-at = 89
+battery-bat = BAT0
+battery-adp = ACAD
+
+
+##################################################
+#                     bspwm
+#
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+; Only scroll through occupied workspaces
+; Default: false
+; New in version 3.6.0
+occupied-scroll = true
+
+label-focused-padding-right = 1
+label-occupied-padding-right = 1
+label-empty-padding-right = 1
+
+label-focused-underline = ${color.green}
+label-empty-foreground = ${color.fgdim}
+
+
+##################################################
+#                     i3
+#
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+strip-wsnumbers = true
+pin-workspaces = true
+
+label-focused = %name%
+label-focused-foreground = ${color.blue}
+label-focused-background = ${color.bg}
+label-focused-underline = ${color.blue}
+
+label-unfocused = %name%
+label-unfocused-background = ${color.bg}
+
+label-visible = %name%
+label-visible-background = ${color.bg}
+
+label-urgent = %name%
+label-urgent-foreground = ${color.red}
+
+index-sort = true
+
+
+##################################################
+#                     datetime
+#
+[module/time]
+type = internal/date
+interval = 1
+format-margin = 0
+time = "%H:%M"
+date = "%Y-%m-%d,"
+
+format-prefix = " date "
+format-prefix-foreground = ${color.blue}
+
+label = %date% %time%
+
+##################################################
+#                    battery
+#
+[module/battery]
+type = internal/battery
+
+full-at = 99
+poll-interval = 1
+battery = ${system.battery}
+adapter = ${system.adapter}
+
+label-full = %percentage%%
+format-full = <label-full>
+format-full-prefix = " bat "
+format-full-prefix-foreground = ${color.blue}
+
+label-charging = %percentage%%
+format-charging = <label-charging>
+format-charging-prefix = " bat "
+format-charging-prefix-foreground = ${color.blue}
+
+label-discharging = %percentage%%
+format-discharging = <label-discharging>
+format-discharging-prefix = " bat "
+format-discharging-prefix-foreground = ${color.blue}
+
+##################################################
+#                    Separator
+#
+[module/|]
+type = custom/text
+content = " | "
+content-foreground = ${color.fg}
+
+
+##################################################
+#                    Tailscale
+#
+[module/tailscale]
+type = custom/script
+exec = ~/.config/polybar/scripts/tailscale.sh
+interval = 1
+
+format-prefix = "ts "
+format-prefix-foreground = ${color.red}
+label = %output%
+
+
+##################################################
+#                    KB Layout
+#
+[module/kblayout]
+type = custom/script
+exec = ~/.config/polybar/scripts/kblayout.sh
+interval = 1
+
+format-prefix = "kb "
+format-prefix-foreground = ${color.orange}
+label = %output%
+
+
+##################################################
+#                    Fan Speed
+#
+[module/fanspeed]
+type = custom/script
+exec = ~/.config/polybar/scripts/fanspeed.sh
+interval = 3
+
+format-prefix = "fan "
+format-prefix-foreground = ${color.orange}
+label = %output:4%
+
+
+##################################################
+#                    Backlight
+#
+[module/backlight]
+type = internal/backlight
+
+card = ${system.graphics_card}
+
+enable-scroll = true
+
+label = %percentage:2%%
+format-prefix = "brt "
+format-prefix-foreground = ${color.green}
+format = <label>
+format-background = ${color.bg}
+
+
+##################################################
+#                       CPU
+#
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format-prefix = " cpu "
+format-prefix-foreground = ${color.green}
+label = %percentage:2%%
+
+
+##################################################
+#                       RAM
+#
+[module/memory]
+type = internal/memory
+
+interval = 10
+
+format = <label>
+format-prefix = " ram "
+format-prefix-foreground = ${color.green}
+label = %gb_used:2%
+
+
+##################################################
+#                   Filesystem
+#
+[module/filesystem]
+type = internal/fs
+
+mount-0 = /
+interval = 10
+fixed-values = true
+
+format-mounted = <label-mounted>
+format-mounted-prefix = "dsk "
+format-mounted-prefix-foreground = ${color.blue}
+
+label-mounted = " %percentage_used%%"
+
+
+##################################################
+#                    Volume
+#
+[module/volume]
+type = internal/pulseaudio
+
+use-ui-max = false
+interval = 5
+
+label-volume = %percentage:2%%
+format = <label-volume>
+format-volume-prefix = " vol "
+format-volume-prefix-foreground = ${color.green}
+
+label-muted = "--%"
+format-muted = <label-muted>
+format-muted-prefix = " vol "
+format-muted-prefix-foreground = ${color.green}
+
+
+##################################################
+#                  Temperature
+#
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 85
+interval = 1
+
+label = %temperature-c%
+format = <label>
+format-prefix = "tmp "
+format-prefix-foreground = ${color.green}
+
+label-warn = %temperature-c%
+format-warn = <label-warn>
+format-warn-prefix = "tmp "
+format-warn-foreground = ${color.red}
