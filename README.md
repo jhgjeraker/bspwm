@@ -14,4 +14,4 @@ Verify that `install.sh` doesn't do anything shady, then run it.
 ./install.sh
 ```
 
-Currently supports Arch-based distros, but can be expanded by updates the approriate package lists.
+Currently supports Arch-based distros, but can be expanded by adding the appropriate package list.
