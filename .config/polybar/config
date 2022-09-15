@@ -44,7 +44,7 @@ padding = 1
 
 modules-left = time | backlight volume | kblayout | tailscale
 modules-center = bspwm i3
-modules-right = fanspeed | temperature cpu memory | filesystem battery |
+modules-right = fanspeed | temperature cpu memory | filesystem bat |
 
 scroll-up = bspwn-wsnext 
 scroll-down = bspwn-wsprev
@@ -340,3 +340,16 @@ label-warn = %temperature-c%
 format-warn = <label-warn>
 format-warn-prefix = "tmp "
 format-warn-foreground = ${color.red}
+
+
+##################################################
+#                Custom Battery
+#
+[module/bat]
+type = custom/script
+exec = ~/.config/polybar/scripts/battery.sh
+interval = 3
+
+format-prefix = " bat "
+format-prefix-foreground = ${color.blue}
+label = %output:2%
