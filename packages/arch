@@ -33,3 +33,6 @@ bluez-utils
 rsync
 tk
 xclip
+picom
+pop-gtk-theme
+pop-icon-theme
