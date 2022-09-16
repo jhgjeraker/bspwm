@@ -28,6 +28,7 @@ sudo rsync scripts/* /usr/local/bin/
 # Deploy and start custom services.
 sudo rsync services/* /etc/systemd/system/
 sudo systemctl enable --now disable-acpi-wakeup.service
+systemctl --user enable --now redshift-gtk.service
 
 # Refresh sxhkd keybinds.
 pkill -USR1 -x sxhkd
