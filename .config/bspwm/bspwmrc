@@ -74,6 +74,9 @@ ibus-daemon -drx
 # -----------------------------------------------
 # Scripts.
 #
+# Launch a compositor.
+bash /usr/local/bin/compositor-init.sh &
+
 # Run monitor setup script.
 bash /usr/local/bin/bspwm-monitor-setup.sh &
 
