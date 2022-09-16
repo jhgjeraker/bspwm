@@ -19,6 +19,8 @@ alt + q
 # Toggle monocle layout.
 alt + m
     bspc desktop -l next
+alt + f
+    bspc desktop -l next
 
 # swap the current node and the biggest window
 alt + g
