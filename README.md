@@ -15,3 +15,13 @@ Verify that `install.sh` doesn't do anything shady, then run it.
 ```
 
 Currently supports Arch-based distros, but can be expanded by adding the appropriate package list.
+
+## Post Installation
+I recommend rebooting after the initial install.
+
+### Neovim Configuration
+LSP configurations and plugins are set by the following steps.
+
+1. Open neovim and execute `:PackerSync`.
+2. Exit and relaunch neovim.
+3. Wait until all LSP configurations have been compiled.
