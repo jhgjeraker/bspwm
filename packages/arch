@@ -16,6 +16,7 @@ ibus
 ibus-anthy
 noto-fonts-cjk
 polkit-gnome
+gnome-keyring
 feh
 pulsemixer
 ranger
