@@ -39,4 +39,6 @@ picom
 pop-gtk-theme
 i3lock
 redshift
-flameshot
+scrot
+jq
+postgresql

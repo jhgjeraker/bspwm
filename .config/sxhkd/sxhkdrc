@@ -193,7 +193,7 @@ alt + n
 
 # Launch screenshot utility.
 Print
-    flameshot gui
+    scrot -s
 
 super + p
     bash /usr/local/bin/bspwm-refresh.sh &
