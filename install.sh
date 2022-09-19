@@ -69,3 +69,7 @@ if [ ! -d "$HOME/.local/share/nvim/site/pack/packer" ]; then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
+
+# Set git difftool to be neovim.
+git config --global diff.tool nvimdiff
+git config --global --add difftool.prompt false
