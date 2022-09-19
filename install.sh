@@ -72,4 +72,3 @@ fi
 
 # Set git difftool to be neovim.
 git config --global diff.tool nvimdiff
-git config --global --add difftool.prompt false
