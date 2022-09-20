@@ -62,13 +62,10 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir
 alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 # Pyenv
-alias pei='bash /usr/local/bin/pyenv-init.sh'
-alias pea='pei && pyenv activate'
-alias ped='pyenv deactivate'
-alias pel='pyenv virtualenvs'
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path --no-rehash)"
+alias pea='source /usr/local/bin/pyenv-init.sh && pyenv activate'
+alias ped='source /usr/local/bin/pyenv-init.sh && pyenv deactivate'
+alias pel='source /usr/local/bin/pyenv-init.sh && pyenv virtualenvs'
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
