@@ -70,6 +70,7 @@ fi
 nm-applet &
 ibus-daemon -drx
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+systemctl restart redshift-gtk --user
 
 # -----------------------------------------------
 # Scripts.
