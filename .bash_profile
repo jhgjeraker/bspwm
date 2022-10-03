@@ -28,3 +28,7 @@ export XIM_PROGRAM=/usr/bin/ibus-daemon
 # Fix an issue where anki would not launch.
 export QTWEBENGINE_CHROMIUM_FLAGS="--no-sandbox"
 
+# -----------------------------------------------
+# Development
+#
+export ARDUINO_DIRECTORIES_USER="$HOME/.config/arduino"
