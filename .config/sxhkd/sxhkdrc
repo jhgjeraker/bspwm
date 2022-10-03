@@ -193,7 +193,7 @@ alt + n
 
 # Launch screenshot utility.
 Print
-    scrot -s
+    maim -s "$(date -u +"%Y-%m-%dT%H:%M:%SZ").png"
 
 super + p
     bash /usr/local/bin/bspwm-refresh.sh &
