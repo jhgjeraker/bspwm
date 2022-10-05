@@ -22,10 +22,6 @@ alt + m
 alt + f
     bspc desktop -l next
 
-# swap the current node and the biggest window
-alt + g
-    bspc node -s biggest.window
-
 
 # -----------------------------------------------
 # State / Flags
