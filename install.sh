@@ -6,6 +6,9 @@ distro=$(cat /etc/os-release | grep -i ID= | grep -P -o '(?<==).*$' | head -1)
 # Install packages required for a quick setup.
 if [[ "$distro" =~ ^(arch|endeavouros)$ ]]; then
     sudo pacman -Syu --needed --noconfirm - < packages/arch 
+elif [[ "$distro" =~ ^(fedora)$ ]]; then
+    sudo dnf update
+    sudo dnf install $(cat packages/fedora)
 else
     echo "Distro \"$distro\" not supported."
     exit
@@ -26,9 +29,9 @@ chmod -R +x scripts/
 sudo rsync scripts/* /usr/local/bin/
 
 # Deploy and start custom services.
-sudo rsync services/* /etc/systemd/system/
-sudo systemctl enable --now disable-acpi-wakeup.service
-systemctl --user enable --now redshift-gtk.service
+# sudo rsync services/* /etc/systemd/system/
+# sudo systemctl enable --now disable-acpi-wakeup.service
+# systemctl --user enable --now redshift-gtk.service
 
 # Refresh sxhkd keybinds.
 pkill -USR1 -x sxhkd
