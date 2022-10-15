@@ -49,6 +49,9 @@ ibus-daemon -drx
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 systemctl restart redshift-gtk --user
 
+# Reload cursor to prevent "X" or oversized.
+xsetroot -cursor_name left_ptr
+
 # -----------------------------------------------
 # Scripts.
 #

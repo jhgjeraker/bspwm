@@ -45,8 +45,6 @@ export ARDUINO_DIRECTORIES_USER="$HOME/.config/arduino"
 # -----------------------------------------------
 # Input Devices
 #
-# Reload cursor to prevent "X" or oversized.
-xsetroot -cursor_name left_ptr
 
 # Set xinput parameters for certain known devices.
 # Thinkpad X1 Extreme Touchpad.
