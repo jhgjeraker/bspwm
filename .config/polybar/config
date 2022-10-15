@@ -123,7 +123,7 @@ label-focused-padding-right = 1
 label-occupied-padding-right = 1
 label-empty-padding-right = 1
 
-label-focused-underline = ${color.green}
+label-focused-underline = ${color.red}
 label-empty-foreground = ${color.fgdim}
 
 
