@@ -21,7 +21,7 @@ chmod -R +x .config/polybar/scripts/
 rsync -r .config/* $HOME/.config/
 rsync .xinitrc $HOME/
 rsync .bashrc $HOME/
-rsync .bash_profile $HOME/
+rsync .profile $HOME/
 rsync .gtkrc-2.0 $HOME/
 
 # Deploy scripts to /usr/local/bin/.

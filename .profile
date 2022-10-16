@@ -66,3 +66,6 @@ fi
 if xinput list | grep -q 'MSHW0092:00 045E:0933 Touchpad'; then
     xinput --set-prop 'MSHW0092:00 045E:0933 Touchpad' 'libinput Natural Scrolling Enabled' 1
 fi
+
+# Reload cursor to prevent "X" or oversized.
+xsetroot -cursor_name left_ptr
