@@ -71,9 +71,7 @@ alias capslock='xdotool key Caps_Lock'
 alias CAPSLOCK='xdotool key Caps_Lock'
 
 # Monitor Configurations.
-alias m1="sh $HOME/.screenlayout/m1.sh"
-alias m2="sh $HOME/.screenlayout/m2.sh"
-alias m3="sh $HOME/.screenlayout/m3.sh"
+alias mm='sh /usr/local/bin/monitors.sh'
 
 # Applications
 alias py='python3'

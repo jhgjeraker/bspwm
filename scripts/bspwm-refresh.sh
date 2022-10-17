@@ -8,6 +8,9 @@
 # Swap Caps Lock with Left Control.
 setxkbmap -option ctrl:nocaps
 
+# Update x-cursor to avoid enlargement.
+xsetroot -cursor_name left_ptr
+
 # Set whatever wallpaper were last used by feh.
 $HOME/.fehbg &
 

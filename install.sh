@@ -24,6 +24,9 @@ rsync .bashrc $HOME/
 rsync .profile $HOME/
 rsync .gtkrc-2.0 $HOME/
 
+# Source .bashrc to get updated configurations.
+source $HOME/.bashrc
+
 # Deploy scripts to /usr/local/bin/.
 chmod -R +x scripts/
 sudo rsync scripts/* /usr/local/bin/

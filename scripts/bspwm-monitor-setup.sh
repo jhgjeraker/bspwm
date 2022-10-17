@@ -20,14 +20,7 @@ OUTPUTS=($(xrandr --listactivemonitors|awk '{print $4}'|sed '/^$/d'))
 NB_OF_MONITORS=${#OUTPUTS[@]}
 
 for MONITOR in ${OUTPUTS[@]}; do
-    case $NB_OF_MONITORS in
-        1)
-            bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8 9 10
-            ;;
-        *)
-            bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8 9 10
-            ;;
-    esac
+    bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8 9 10
 
     ## reorder the desktops for each monitor
     bspc monitor $MONITOR -o $(eval _desk_order $MONITOR)
