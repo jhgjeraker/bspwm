@@ -47,7 +47,6 @@ bspc rule -a Zathura state=tiled
 nm-applet &
 ibus-daemon -drx
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-systemctl --user enable now redshift-gtk
 
 # -----------------------------------------------
 # Scripts.
