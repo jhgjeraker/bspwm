@@ -50,6 +50,7 @@ fi
 # Thinkpad X13 Gen 2 Touchpad.
 if xinput list | grep -q 'ELAN0676:00 04F3:3195 Touchpad'; then
     xinput --set-prop 'ELAN0676:00 04F3:3195 Touchpad' 'libinput Natural Scrolling Enabled' 1
+    xinput --set-prop 'ELAN0676:00 04F3:3195 Touchpad' 'libinput Tapping Enabled' 1
 fi
 # Surface Laptop 2 Touchpad.
 if xinput list | grep -q 'MSHW0092:00 045E:0933 Touchpad'; then
