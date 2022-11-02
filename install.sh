@@ -23,6 +23,7 @@ rsync .xinitrc $HOME/
 rsync .bashrc $HOME/
 rsync .profile $HOME/
 rsync .gtkrc-2.0 $HOME/
+rsync .Xresources $HOME/
 
 # Source .bashrc to get updated configurations.
 source $HOME/.bashrc
