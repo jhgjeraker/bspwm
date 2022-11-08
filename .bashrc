@@ -99,6 +99,11 @@ alias pel='pei && pyenv virtualenvs'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --glob "!.git/*" --glob "!node_modules/*" --glob "!vendor/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# powerprofilesctl
+alias ppl='powerprofilesctl set power-saver'
+alias ppm='powerprofilesctl set balanced'
+alias pph='powerprofilesctl set performance'
+
 
 # -----------------------------------------------
 # Development
