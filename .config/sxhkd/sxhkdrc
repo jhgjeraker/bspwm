@@ -189,7 +189,7 @@ alt + n
 
 # Launch screenshot utility.
 Print
-    maim -s "$(date -u +"%Y-%m-%dT%H:%M:%SZ").png"
+    flameshot gui
 
 super + p
     bash /usr/local/bin/bspwm-refresh.sh &
