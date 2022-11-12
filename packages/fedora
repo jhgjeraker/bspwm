@@ -27,7 +27,7 @@ picom
 pop-gtk2-theme
 pop-gtk3-theme
 pop-gtk4-theme
-redshift
+redshift-gtk
 i3lock
 nodejs
 npm
@@ -36,3 +36,12 @@ python3-devel
 ripgrep
 libX11-devel
 libXext-devel
+arandr
+network-manager-applet
+lxappearance
+zathura
+zathura-pdf-mupdf
+zathura-cb
+flameshot
+htop
+powertop
