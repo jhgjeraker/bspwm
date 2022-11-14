@@ -45,6 +45,7 @@ bspc rule -a Zathura state=tiled
 # Autostart.
 #
 nm-applet &
+blueman-applet &
 ibus-daemon -drx
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 

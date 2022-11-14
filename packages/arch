@@ -32,6 +32,7 @@ flake8
 bash-completion
 bluez
 bluez-utils
+blueman
 rsync
 tk
 xclip
