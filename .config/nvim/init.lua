@@ -352,7 +352,7 @@ H.map('n', 'me', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 H.map('n', 'mE', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 H.map('n', '[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 H.map('n', ']', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-H.map('n', 'mf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+H.map('n', 'mf', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
 
 -------------------------------------------------------------------------------
