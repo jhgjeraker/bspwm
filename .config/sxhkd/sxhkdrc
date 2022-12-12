@@ -206,5 +206,8 @@ alt + n
 Print
     flameshot gui
 
-super + p
+super + b
     bash /usr/local/bin/power-manager.sh &
+
+super + p
+    bash /usr/local/bin/polybar-toggle.sh &
