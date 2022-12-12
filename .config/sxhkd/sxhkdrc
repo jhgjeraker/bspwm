@@ -12,6 +12,10 @@ super + Escape
 super + alt + {q,r}
     bspc {quit,wm -r}
 
+# Refresh bspwm.
+super + r
+    bash /usr/local/bin/bspwm-refresh.sh &
+
 # Close a single window.
 alt + q
     bspc node -c
@@ -180,7 +184,7 @@ alt + Return
 
 # Launcher.
 alt + d
-    dmenu_run -nb '#272727' -nf '#ebdbb2' -sb '#b8bb26' -sf '#272727'
+    dmenu_run
 
 # Lock screen.
 super + b
@@ -199,4 +203,4 @@ Print
     flameshot gui
 
 super + p
-    bash /usr/local/bin/bspwm-refresh.sh &
+    bash /usr/local/bin/power-manager.sh &
