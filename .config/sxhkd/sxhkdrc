@@ -187,8 +187,12 @@ alt + d
     dmenu_run
 
 # Lock screen.
-super + b
+super + l
     i3lock --color 292929
+
+# Lock screen + suspend.
+super + shift + l
+    i3lock --color 292929 && systemctl suspend
 
 # Set US keyboard layout.
 alt + u
