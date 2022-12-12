@@ -119,7 +119,7 @@ export SAM_CLI_TELEMETRY=0
 export PATH="$HOME/.tfenv/bin:$PATH"
 
 # Disruptive Technologies
-export DT_CREDENTIALS_FILE='/home/kepler/.config/disruptive/DT_CREDENTIALS_FILE.json'
+export DT_CREDENTIALS_FILE='/home/kepler/.config/disruptive/credentials.json'
 
 # Google Cloud
 # The next line updates PATH for the Google Cloud SDK.
