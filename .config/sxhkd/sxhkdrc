@@ -121,6 +121,13 @@ XF86AudioMute
 XF86AudioMicMute
     pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
+XF86AudioPlay
+    playerctl play-pause
+XF86AudioNext
+    playerctl next
+XF86AudioPrev
+    playerctl previous
+
 # Increase screen brightness.
 XF86MonBrightnessUp
     light -A 5
