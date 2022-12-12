@@ -12,7 +12,7 @@ bar_hide(){
 
 bar_show(){
     polybar-msg cmd show
-    bspc config top_padding 25
+    bspc config top_padding 20
 }
 
 # Declare out string variable.
