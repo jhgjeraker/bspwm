@@ -6,6 +6,7 @@ dmenu
 polybar
 light
 xrandr
+xset
 xsetroot
 xinput
 setxkbmap
@@ -15,7 +16,6 @@ gnome-keyring
 feh
 ranger
 ripgrep
-lm_sensors
 python3-pip
 golang
 gcc-c++
@@ -24,14 +24,8 @@ rsync
 tk
 xclip
 picom
-pop-gtk2-theme
-pop-gtk3-theme
-pop-gtk4-theme
 redshift-gtk
 i3lock
-nodejs
-npm
-python3-flake8
 python3-devel
 ripgrep
 libX11-devel
@@ -39,11 +33,9 @@ libXext-devel
 arandr
 network-manager-applet
 lxappearance
-zathura
-zathura-pdf-mupdf
-zathura-cb
 flameshot
 htop
 powertop
 playerctl
 autorandr
+xss-lock

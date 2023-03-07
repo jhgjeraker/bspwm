@@ -10,7 +10,7 @@ bspc config automatic_scheme              longest_side
 bspc config split_ratio                   0.50
 bspc config border_width                  3
 bspc config single_monocle                true
-bspc config borderless_monocle            true
+bspc config borderless_monocle            false
 bspc config gapless_monocle               false
 bspc config focus_follows_pointer         true
 bspc config pointer_follows_focus         false
@@ -22,11 +22,11 @@ bspc config center_pseudo_tiled           true
 bspc config ignore_ewmh_focus             false
 
 # Gaps and padding.
-bspc config window_gap      +25
-bspc config bottom_padding  -10
-bspc config left_padding    -10
-bspc config right_padding   -10
-bspc config top_padding     +20
+bspc config window_gap      20
+bspc config bottom_padding   0
+bspc config left_padding     0
+bspc config right_padding    0
+bspc config top_padding     30
 
 # mod1=Alt, mod4=super, mod5=AltGr
 bspc config pointer_modifier mod1
@@ -40,28 +40,42 @@ bspc config active_border_color   "#292929"
 bspc config focused_border_color  "#fb4934"
 bspc config presel_feedback_color "#504945"
 
-# Custom rules.
+# Custom tiling rules.
 bspc rule -a Zathura state=tiled
 
+# Swap Caps Lock with Left Control.
+setxkbmap -option ctrl:nocaps
+
+# Update x-cursor to avoid enlargement.
+# To avoid "X" cursor outside windows, install lxappearance.
+xsetroot -cursor_name left_ptr
+
+# Set whatever wallpaper were last used by feh.
+"$HOME/.fehbg" &
+
+# Launch polybar.
+bash "$HOME/.config/polybar/launch.sh" > /dev/null 2>&1
+
+# Modify key repeat.
+xset r rate 350 30
+# xset r off
+
 # -----------------------------------------------
-# Autostart.
+# Autostart
 #
 nm-applet &
 blueman-applet &
-ibus-daemon -drx
+picom -b
+ibus-daemon -drxR
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+systemctl restart --user redshift-gtk
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+xss-lock --transfer-sleep-lock -- i3lock -c 292929 --nofork &
 
 # -----------------------------------------------
-# Scripts.
+# Scripts
 #
-# Launch a compositor.
-bash /usr/local/bin/compositor-init.sh &
-
 # Run monitor setup script.
-bash /usr/local/bin/bspwm-monitor-setup.sh &
-
-# Run the refresh script. This contains programs and
-# commands that usually require some kind of update
-# or refresh from time to time, like when changing
-# the monitor setup.
-bash /usr/local/bin/bspwm-refresh.sh &
+bash "$HOME/.local/bin/bspwm-monitor-setup.sh" &

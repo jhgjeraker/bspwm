@@ -18,19 +18,19 @@ fi
 # This will replace any existing files.
 chmod +x .config/bspwm/bspwmrc
 chmod -R +x .config/polybar/scripts/
-rsync -r .config/* $HOME/.config/
-rsync .xinitrc $HOME/
-rsync .bashrc $HOME/
-rsync .profile $HOME/
-rsync .gtkrc-2.0 $HOME/
-rsync .Xresources $HOME/
+rsync -r .config/* "$HOME/.config/"
+rsync .xinitrc "$HOME/"
+rsync .bashrc "$HOME/"
+rsync .profile "$HOME/"
+rsync .gtkrc-2.0 "$HOME/"
+rsync .Xresources "$HOME/"
 
 # Source .bashrc to get updated configurations.
-source $HOME/.bashrc
+source "$HOME/.bashrc"
 
-# Deploy scripts to /usr/local/bin/.
+# Deploy scripts to $HOME/.local/bin/.
 chmod -R +x scripts/
-sudo rsync scripts/* /usr/local/bin/
+sudo rsync scripts/* "$HOME/.local/bin/"
 
 # Deploy and start custom services.
 sudo rsync services/* /etc/systemd/system/
@@ -41,11 +41,11 @@ pkill -USR1 -x sxhkd
 
 # Add user to the video group.
 # This is required for brightness controls.
-sudo usermod -aG video $(whoami)
+sudo usermod -aG video "$(whoami)"
 
 # Deploy fonts.
-mkdir -p $HOME/.local/share/fonts
-rsync -r fonts/* $HOME/.local/share/fonts/
+mkdir -p "$HOME/.local/share/fonts"
+rsync -r fonts/* "$HOME/.local/share/fonts/"
 fc-cache -f
 
 # Directory casing is annoying and takes longer to write out, so

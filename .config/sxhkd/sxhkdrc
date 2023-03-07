@@ -1,12 +1,12 @@
 # -----------------------------------------------
 # sxhkd
 #
-# make sxhkd reload its configuration files:
+# Reload sxhkd configuration.
 super + Escape
     pkill -USR1 -x sxhkd
 
 # -----------------------------------------------
-# Windowing Hotkeys
+# bspwm
 #
 # Quit/restart bspwm.
 super + alt + {q,r}
@@ -17,27 +17,25 @@ super + r
     bash /usr/local/bin/bspwm-refresh.sh &
 
 # Close a single window.
-alt + q
+alt + shift + q
     bspc node -c
 
-# Toggle monocle layout.
+# Toggle monocle (fullscreen) layout.
 alt + m
     bspc desktop -l next
 alt + f
-    bspc desktop -l next
-
+    bspc node -t \~fullscreen
 
 # -----------------------------------------------
 # State / Flags
 #
 # Set node state.
-super + {t,shift + t,s,f}
+super + {t,shift + t,g,f}
     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # Set node flags.
 super + ctrl + {m,x,y,z}
     bspc node -g {marked,locked,sticky,private}
-
 
 # -----------------------------------------------
 # Focus / Swap
@@ -48,8 +46,14 @@ alt + {_,shift + }{h,j,k,l}
 
 # Focus or send node to given desktop.
 alt + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} focused:'^{1-9,10}'
+    bspc {desktop -f,node -d} '{1-9,10}'
 
+# Send all windows in current desktop to another desktop.
+alt + Escape
+    bspc node -f @first
+
+alt + Tab
+    bspc node -f @parent
 
 # -----------------------------------------------
 # Receptacle
@@ -85,29 +89,48 @@ alt + ctrl + Escape
 alt + ctrl + shift + Escape
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
-
 # -----------------------------------------------
 # Move / Resize
 #
 # Expand one of a node's sides.
 super + alt + {h,j,k,l}
-    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+    bspc node -z {left -50 0,bottom 0 50,top 0 -50,right 50 0}
 
 # Contract one of a node's sides.
 super + alt + shift + {h,j,k,l}
-    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+    bspc node -z {right -50 0,top 0 50,bottom 0 -50,left 50 0}
 
 # Equally resize splits.
 super + alt + space
     bspc node @/ -B
 
 # Move a floating window.
-alt + {Left,Down,Up,Right}
-    bspc node -v {-20 0,0 20,0 -20,20 0}
-
+super + alt + {Left,Down,Up,Right}
+    bspc node -v {-50 0,0 50,0 -50,50 0}
 
 # -----------------------------------------------
-# Controls and Input
+# Multi-Monitor Functionality
+#
+# Focus monitor.
+alt + {z,x}
+    bspc desktop -f "{prev,next}:focused" --follow
+
+# Move desktop to next/prev monitor.
+alt + shift + {z,x}
+    bspc desktop -m {prev,next} --follow && \
+    bspc query -M | while read -r monitor; do \
+        bspc query -D -m "$monitor" --names | sort -g | xargs -rd'\n' bspc monitor "$monitor" -o; \
+    done
+
+# Sort desktops on active monitor, then remove default 'Desktop'.
+super + x
+    bspc query -M | while read -r monitor; do \
+        bspc query -D -m "$monitor" --names | sort -g | xargs -rd'\n' bspc monitor "$monitor" -o; \
+    done && \
+    bspc desktop Desktop --remove
+
+# -----------------------------------------------
+# Multimedia Keys
 #
 # Increase volume.
 XF86AudioRaiseVolume
@@ -140,41 +163,6 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
     light -U 5
 
-
-# -----------------------------------------------
-# Multi-Monitor Functionality
-#
-# Focus monitor.
-super + {1,2,3}
-    bspc desktop -f "^{1,2,3}:focused" --follow
-
-# Swap current desktop with same desktop on target monitor.
-super + shift + {1,2,3}
-    bspc desktop --swap "^{1,2,3}:^"$(bspc query -D -d focused --names) --follow
-
-# Move current node to focused desktop on target monitor.
-super + alt + shift + {1,2,3}
-    bspc node -d "^{1,2,3}:focused" --follow
-
-# Reset monitor desktops.
-super + m
-    bash /usr/local/bin/bspwm-monitor-setup.sh
-
-# Move desktop to next/prev monitor.
-super + {_,shift + }Tab
-	bspc desktop -m {next,prev} --follow && \
-	bspc query -M | while read -r monitor; do \
-	    bspc query -D -m "$monitor" --names | sort -g | xargs -rd'\n' bspc monitor "$monitor" -o; \
-	done
-
-# Sort desktops on active monitor, then remove default 'Desktop'.
-super + x
-	bspc query -M | while read -r monitor; do \
-	    bspc query -D -m "$monitor" --names | sort -g | xargs -rd'\n' bspc monitor "$monitor" -o; \
-	done && \
-        bspc desktop Desktop --remove
-
-
 # -----------------------------------------------
 # Programs
 #
@@ -186,13 +174,16 @@ alt + Return
 alt + d
     dmenu_run
 
+alt + p
+    "$HOME/.local/bin/power-manager.sh"
+
 # Lock screen.
 super + l
     i3lock --color 292929
 
-# Lock screen + suspend.
-super + shift + l
-    i3lock --color 292929 && systemctl suspend
+# Suspend.
+super + s
+    systemctl suspend
 
 # Set US keyboard layout.
 alt + u
@@ -205,9 +196,3 @@ alt + n
 # Launch screenshot utility.
 Print
     flameshot gui
-
-super + b
-    bash /usr/local/bin/power-manager.sh &
-
-super + p
-    bash /usr/local/bin/polybar-toggle.sh &

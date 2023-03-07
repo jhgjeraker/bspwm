@@ -40,4 +40,4 @@ scrolling:
   history: 10000
 
 key_bindings:
-  - { key: Q, mods: Control, mode: ~Search, action: ToggleViMode }
+  - { key: Escape, mods: Control, mode: ~Search, action: ToggleViMode }
