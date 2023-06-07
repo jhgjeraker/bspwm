@@ -168,13 +168,13 @@ XF86MonBrightnessDown
 #
 # Terminal emulator.
 alt + Return
-    alacritty
+    kitty
 
 # Launcher.
-alt + d
+super + d
     dmenu_run
 
-alt + p
+super + p
     "$HOME/.local/bin/power-manager.sh"
 
 # Lock screen.
@@ -186,11 +186,11 @@ super + s
     systemctl suspend
 
 # Set US keyboard layout.
-alt + u
+super + u
     setxkbmap us
 
 # Set norwegian keyboard layout.
-alt + n
+super + n
     setxkbmap no
 
 # Launch screenshot utility.
