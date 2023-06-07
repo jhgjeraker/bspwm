@@ -171,7 +171,7 @@ alt + Return
     kitty
 
 # Launcher.
-super + d
+alt + d
     dmenu_run
 
 super + p
